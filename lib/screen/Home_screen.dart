@@ -51,7 +51,7 @@
 //   }
 // }
 
-import 'package:animated/screen%20/details_screen.dart';
+import 'package:animated/screen/details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controller/home_controller.dart';

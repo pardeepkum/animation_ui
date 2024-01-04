@@ -1,7 +1,6 @@
-import 'package:animated/screen%20/page.dart';
+import 'package:animated/screen/page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'third_page.dart';
 
 class PageList extends StatelessWidget {

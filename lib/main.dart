@@ -1,3 +1,6 @@
+import 'package:animated/screen/card_screen.dart';
+import 'package:animated/screen/details_screen.dart';
+import 'package:animated/screen/third_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'screen/Home_screen.dart';
@@ -9,7 +12,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -19,7 +21,28 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:  HomePage(),
+      getPages: [
+        GetPage(
+          name: '/HomePage',
+          page: () => HomePage(),
+
+        ),
+        GetPage(
+          name: '/PageList',
+          page: () =>  PageList(),
+
+        ),
+        GetPage(
+          name: '/HomePageScreen',
+          page: () => const HomePageScreen(),
+        ),
+        GetPage(
+          name: '/FlipCardWidget',
+          page: () =>  FlipCardWidget(),
+        ),
+
+      ],
+    home: HomePage(),
     );
   }
 }

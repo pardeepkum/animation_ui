@@ -1,7 +1,6 @@
 import 'package:animated/screen/page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'third_page.dart';
 
 class PageList extends StatelessWidget {
    PageList({super.key});
@@ -18,7 +17,12 @@ class PageList extends StatelessWidget {
         key: _listKey,
         initialItemCount: items.length,
         itemBuilder: (context, index, animation) {
-          return buildItem(items[index], animation);
+          return Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Card(
+                elevation: 4,
+                child: buildItem(items[index], animation)),
+          );
         },
       ),
       floatingActionButton: Row(
@@ -26,18 +30,21 @@ class PageList extends StatelessWidget {
           Expanded(
             child: GestureDetector(
               onTap: (){
-                Get.toNamed( HomePageScreen().toString() );
+                Get.toNamed('/HomePageScreen');
               },
               child: Container(
-                height: 100,
                 width: 200,
-                padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 40,vertical: 20),
+                margin: const EdgeInsets.only(left: 30),
+                decoration: BoxDecoration(
                 color: Colors.greenAccent,
-                child: Text("Next page"),
+                borderRadius: BorderRadius.circular(12)
+              ),
+                child: const Text("Next page"),
               ),
             ),
           ),
-          SizedBox(width: 100,),
+          const SizedBox(width: 100,),
           FloatingActionButton(
             onPressed: () {
               _addItem('New Item');
@@ -51,14 +58,13 @@ class PageList extends StatelessWidget {
 
   Widget buildItem(String itemName, Animation<double> animation) {
     return SlideTransition(
-      position: Tween<Offset>(begin: Offset(1, 0), end: Offset(0, 0)).animate(animation),
+      position: Tween<Offset>(begin: const Offset(1, 0), end: const Offset(0, 0)).animate(animation),
       child: ListTile(
         title: Hero(
-          tag: itemName,
+          tag: 'item_$itemName',
           child: Text(itemName),
         ),
         onTap: () {
-          //Navigator.of(context).push(_createRoute(itemName));
           Get.toNamed(itemName);
         },
         onLongPress: () {
@@ -68,7 +74,7 @@ class PageList extends StatelessWidget {
     );
   }
 
-  Route _createRoute(String itemName) {
+  Route createRoute(String itemName) {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) => Page2(itemName: itemName),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
@@ -91,18 +97,19 @@ class PageList extends StatelessWidget {
     _listKey.currentState?.insertItem(0);
   }
 
-  void _removeItem(String itemName) {
-    final index = items.indexOf(itemName);
-    if (index != -1) {
-      _listKey.currentState?.removeItem(
-        index,
-            (context, animation) => buildItem(items[index], animation),
-        duration: Duration(milliseconds: 500),
-      );
+   void _removeItem(String itemName) {
+     final index = items.indexOf(itemName);
+     if (index != -1) {
+       final removedItem = items[index];
+       _listKey.currentState?.removeItem(
+         index,
+             (context, animation) => buildItem(removedItem, animation),
+         duration: const Duration(milliseconds: 500),
+       );
+       items.removeAt(index);
+     }
+   }
 
-      items.removeAt(index);
-    }
-  }
 }
 
 

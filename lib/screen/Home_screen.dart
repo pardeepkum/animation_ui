@@ -1,55 +1,4 @@
-// import 'package:flutter/material.dart';
-// import 'package:get/get.dart';
-//
-// import '../controller/home_controller.dart';
-//
-// class HomePage extends StatelessWidget {
-//   final HomeController homeController = Get.put(HomeController());
-//
-//   final List<String> items = ["Item 1", "Item 2", "Item 3", "Item 4"];
-//
-//    HomePage({super.key});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         centerTitle: true,
-//         title: const Text('Animated Transition '),
-//       ),
-//       body: ListView.builder(
-//         itemCount: items.length,
-//         itemBuilder: (context, index) {
-//           return GestureDetector(
-//             onTap: () {
-//               homeController.changePage(index);
-//             },
-//             child:Obx(
-//                   () => AnimatedOpacity(
-//                 opacity: homeController.currentPageIndex.value == index ? 1.0 : 0.5,
-//                 duration: const Duration(milliseconds: 300),
-//                 child: Container(
-//                   padding: const EdgeInsets.all(16.0),
-//                   color: homeController.currentPageIndex.value == index
-//                       ? Colors.blue
-//                       : Colors.transparent,
-//                   child: Text(
-//                     items[index],
-//                     style: TextStyle(
-//                       color: homeController.currentPageIndex.value == index
-//                           ? Colors.white
-//                           : Colors.black,
-//                     ),
-//                   ),
-//                 ),
-//               ),
-//             ),
-//           );
-//         },
-//       ),
-//     );
-//   }
-// }
+
 
 import 'package:animated/screen/details_screen.dart';
 import 'package:flutter/material.dart';
@@ -68,7 +17,7 @@ class HomePage extends StatelessWidget {
           title: const Text('Loading Animation widget'),
         ),
         body: Padding(
-          padding:  EdgeInsets.symmetric(horizontal: MediaQuery.of(context).devicePixelRatio*5),
+          padding:  EdgeInsets.symmetric(horizontal: MediaQuery.of(context).devicePixelRatio*8),
           child: ListView.builder(
            itemCount:homeController.animationItems.length,
            itemBuilder: (context, index) {
@@ -77,7 +26,7 @@ class HomePage extends StatelessWidget {
              title: Row(
                children: [
                  SizedBox(
-                   width: MediaQuery.of(context).devicePixelRatio*12,
+                   width: MediaQuery.of(context).devicePixelRatio*18,
                   // height: MediaQuery.of(context).devicePixelRatio.,
                    child:homeController.animationItems[index],
                  ),
@@ -87,6 +36,9 @@ class HomePage extends StatelessWidget {
                      child: Text(
                        'Loading Animation ${index + 1}',
                        textScaleFactor: 1.3,
+                       style: const TextStyle(
+                         fontSize: 11
+                       ),
                        textAlign: TextAlign.left,
                      ),
                    ),

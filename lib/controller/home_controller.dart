@@ -4,6 +4,12 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class HomeController extends GetxController {
   var currentPageIndex = 0.obs;
+  // for the card flip back and start to the widget 
+  var isCardFlipped = false.obs;
+
+  void flipCard() {
+    isCardFlipped.value = !isCardFlipped.value;
+  }
 
   final List<Widget> animationItems = [
     LoadingAnimationWidget.twistingDots(
